@@ -1,0 +1,17 @@
+<block wx:for="{{rss_array}}">
+  <!--view 和 text有什么区别-->
+  <view>
+    <text>{{item.title}}</text>
+  </view>
+  
+  <view>
+    <text>{{item.intro}}</text>
+  </view>
+
+  <view>
+    <text>{{item.source}}</text>
+    <text>{{item.date}}</text>
+  </view>
+  <view class="divLine"></view>
+
+</block>
