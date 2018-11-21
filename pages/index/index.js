@@ -35,12 +35,11 @@ Page({
       // 云函数名称
       name: 'get_rss_list',
       success: function (res) {
-        console.log(res.result)
-        const data = res.result["rss_list"]
-        const rss_data = data["data"][0]["data"]
-        console.log(rss_data)
+        //提取数据
+        const data = res.result.rss_list.data
+        console.log(data)
         that.setData({
-          "rss_array": rss_data
+          "rss_array": data
         })
 
       },
@@ -82,5 +81,24 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onItemClick: function(e) {
+    console.log(e.currentTarget.dataset.url)
+    console.log(e.currentTarget.dataset.id)
+    wx.cloud.callFunction({
+      // 云函数名称 
+      name: 'update_view_count',
+      data: {
+        _id: e.currentTarget.dataset.id
+      },
+      success: function (res) {
+        console.log('成功')
+        console.log(res.result)
+      },
+      fail: console.error
+    })
+    wx.navigateTo({
+      url: '../details/details?url=' + e.currentTarget.dataset.url,
+    })
   }
 })

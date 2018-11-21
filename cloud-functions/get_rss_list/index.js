@@ -10,9 +10,7 @@ const db = cloud.database({
 // 云函数入口函数
 exports.main = async (event, context) => {
   return {
-    rss_list: await db.collection('rss_list').where({
-      "name": "rss_list"
-    }).get(),
+    rss_list: await db.collection('rss_list_v2').get(),
   
   }
 }

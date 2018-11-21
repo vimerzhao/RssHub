@@ -1,17 +1,22 @@
 <block wx:for="{{rss_array}}">
   <!--view 和 text有什么区别-->
+  <!--必须加data前缀-->
+  <view class="list_item" data-url="{{item.link}}" data-id="{{item._id}}"  bindtap='onItemClick'>
   <view>
-    <text>{{item.title}}</text>
+    <text class="list_title">{{item.title}}</text>
   </view>
   
   <view>
-    <text>{{item.intro}}</text>
+    <text class="list_intro">{{item.intro}}</text>
   </view>
 
-  <view>
-    <text>{{item.source}}</text>
+  <view class="list_detail">
     <text>{{item.date}}</text>
+    <text>{{item.source}}</text>
+
+    <text id="view_count">{{item.view_count}}</text>
   </view>
   <view class="divLine"></view>
+  </view>
 
 </block>
