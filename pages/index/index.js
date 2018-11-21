@@ -98,7 +98,7 @@ Page({
       fail: console.error
     })
     wx.navigateTo({
-      url: '../details/details?url=' + e.currentTarget.dataset.url,
+      url: '../publish/publish?url=' + e.currentTarget.dataset.url,
     })
   }
 })

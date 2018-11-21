@@ -1,8 +1,10 @@
 {
   "pages":[
+    "pages/posts/posts",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/publish/publish"
   ],
   "window":{
     "backgroundTextStyle":"light",

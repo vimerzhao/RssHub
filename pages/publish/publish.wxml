@@ -1,0 +1,12 @@
+<view class='page'>
+ <textarea class='text' bindinput="input" placeholder="分享动态" auto-height/>
+ <view class="image_content">
+ <view class='image' wx:for="{{img_url}}">
+  <image class="moment_img" src="{{item}}"></image>
+ </view>
+ <view class='image' style='display:{{hideAdd?"none":"block"}}'>
+  <image bindtap="chooseimage" class="moment_img" src='../../images/add.png'></image>
+ </view>
+ </view>
+ <button bindtap="send" style='margin-right:5px;margin-left:5px'>发布</button>
+</view>
