@@ -1,2 +1,11 @@
 <!--pages/posts/posts.wxml-->
 <text>pages/posts/posts.wxml</text>
+<block wx:for="{{post_list}}">
+<view><text>{{item.content}}</text></view>
+<view class="layout_horizontal">
+  <view><text>{{item.author_name}}</text></view>
+  <view><text>{{item.view_count}}人浏览</text></view>
+</view> 
+<view class="divLine"></view>
+</block>
+<icon type="success" size="50" class="new_post" bindtap="newPost"/>

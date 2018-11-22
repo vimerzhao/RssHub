@@ -15,7 +15,7 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/posts/posts",
         "text": "阅读"
       },
       {
@@ -24,5 +24,6 @@
       }
     ]
   },
+
   "cloud": true
 }

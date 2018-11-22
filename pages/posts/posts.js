@@ -5,13 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    "post_list": null,
+    update: false
   },
-
   /**
-   * 生命周期函数--监听页面加载
+   * 刷新数据
    */
-  onLoad: function (options) {
+  refresh: function () {
     var that = this
     wx.cloud.init()
     wx.cloud.callFunction({
@@ -19,16 +19,25 @@ Page({
       name: 'get_post_list',
       success: function (res) {
         //提取数据
-        const data = res.result.post_list
+        const data = res.result.post_list.data
         console.log(data)
         that.setData({
-          
+          "post_list": data
         })
+        wx.stopPullDownRefresh()
 
       },
       fail: console.error
     })
 
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    console.log("posts.js - onLoad")
+    wx.startPullDownRefresh()
+    this.refresh()
   },
 
   /**
@@ -42,7 +51,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log("posts.js - onShow")
+    if (this.data.update) {
+      wx.startPullDownRefresh()
+      this.refresh()
+      this.setData({
+        update: false
+      })
+    }
   },
 
   /**
@@ -63,7 +79,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.refresh()
   },
 
   /**
@@ -78,5 +94,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  newPost: function(e) {
+    wx.navigateTo({
+      url: '../publish/publish'
+    })
   }
 })

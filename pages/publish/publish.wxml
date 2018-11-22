@@ -8,5 +8,5 @@
   <image bindtap="chooseimage" class="moment_img" src='../../images/add.png'></image>
  </view>
  </view>
- <button bindtap="send" style='margin-right:5px;margin-left:5px'>发布</button>
+ <button bindtap="send">发布</button>
 </view>
