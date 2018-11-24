@@ -1,15 +1,20 @@
-<!--pages/posts/posts.wxml-->
-<text>pages/posts/posts.wxml</text>
 <block wx:for="{{post_list}}">
-<view><text>{{item.content}}</text></view>
-<view class="layout_horizontal">
-  <view><text>{{item.author_name}}</text></view>
-  <view><text>{{item.view_count}}人浏览</text></view>
-</view> 
 <view class="divLine"></view>
+<!--block不能设置css-->
+<view class='post_list'>
+
+<view><text class='title'>{{item.content}}</text></view>
+<view class="layout_horizontal">
+  <view><text class='extra_info'>{{item.author_name}}</text></view>
+  <view><text class='extra_info watch_count'>{{item.watch_count}}人浏览</text></view>
+</view> 
+</view>
 </block>
-<icon type="success" size="50" class="new_post" bindtap="newPost"/>
+<!--TODO 如何使用MinUI提供的组件库-->
+<image bindtap="chooseimage" class="moment_img new_post" bindtap="newPost" src='../../images/newPost.png'></image>
 <!-- 需要使用 button 来授权登录 -->
+<!--
 <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
 <view wx:else>请升级微信版本</view>
+-->
 

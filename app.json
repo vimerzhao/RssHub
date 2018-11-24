@@ -8,19 +8,21 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#00BFFF",
+    "navigationBarTitleText": "吃瓜群众",
+    "navigationBarTextStyle":"white"
   },
   "tabBar": {
+    "selectedColor": "#00BFFF",
     "list": [
       {
         "pagePath": "pages/posts/posts",
-        "text": "阅读"
+        "text": "发现"
+
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "设置"
+        "text": "我的"
       }
     ]
   },
