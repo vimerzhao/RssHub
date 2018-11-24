@@ -10,13 +10,13 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   console.log("云函数入口")
-  console.log(event.id)
-  await db.collection('rss_list_v2').where({
-    _id: event._id
+  console.log(event.postid)
+  await db.collection('post_collection').where({
+    _id: event.postid
   }).update({
     // data 传入需要局部更新的数据
     data: {
-      view_count: _.inc(1)
+      watch_count: _.inc(1)
     },
     success: function (res) {
       console.log(res.data)

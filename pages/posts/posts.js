@@ -9,7 +9,7 @@ Page({
     "post_list": null,
     update: false,
     userInfo: {},
-    hasUserInfo: false,
+    hasUserInfo: false,// 会导致每次加载授权按钮都一闪而过，需要优化
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   /**
@@ -40,6 +40,7 @@ Page({
    */
   onLoad: function (options) {
     console.log("posts.js - onLoad")
+    
     wx.startPullDownRefresh()
     this.refresh()
 
@@ -47,7 +48,7 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        hasUserInfo: true,
       })
       console.log(this.data.userInfo)
     } else if (this.data.canIUse) {
@@ -136,12 +137,29 @@ Page({
       url: '../publish/publish'
     })
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  onItemClick: function (e) {
+    console.log(e.currentTarget.dataset.postid)
+    wx.navigateTo({
+      url: '../postdetail/postdetail?postid=' + e.currentTarget.dataset.postid,
     })
+  },
+  bindGetUserInfo: function (e) {
+    console.log(e.detail.userInfo)
+    if (e.detail.userInfo) {
+      //用户按了允许授权按钮
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+          console.log(this.data.userInfo)
+        }
+      })
+
+    } else {
+      //用户按了拒绝按钮
+    }
   }
 })

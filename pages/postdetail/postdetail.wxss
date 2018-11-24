@@ -1,0 +1,36 @@
+/* pages/postdetail/postdetail.wxss */
+
+.title_area{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.text_area {
+  margin-left: 30rpx;
+}
+.publish_time{
+  font-size: 8pt;
+  color: gray;
+}
+.avatar{
+  width: 80rpx;
+  height: 80rpx;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.text{
+  margin-bottom: 20rpx;
+}
+.image_area{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}

@@ -8,7 +8,8 @@ Page({
   data: {
     img_url: [],
     content: '',
-    clould_img_id_list: []
+    clould_img_id_list: [],
+    maxContentLength: 1000
   },
   /**
    * 生命周期函数--监听页面加载
@@ -18,6 +19,11 @@ Page({
     
   },
   input: function (e) {
+    if (e.detail.value.length >= this.data.maxContentLength) {
+      wx.showToast({
+        title: '已达到最大字数限制',
+      })
+    }
     this.setData({
       content: e.detail.value
     })
