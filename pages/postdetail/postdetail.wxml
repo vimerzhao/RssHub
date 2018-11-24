@@ -23,7 +23,28 @@
   <view style='background: red'>数据展示区：浏览数，关注数，评论数等等</view>
   <view style='background: red'>
     <text>全部评论</text>
-    <text>评论能力待完成</text>
   </view>
-  <view class='comment'></view>
+  <view class='comment_list' wx:for="{{comments}}">
+    <view class='comment_item'>
+     <view class='avatar_area comment_avatar'>
+      <image class='avatar' src='../../images/bird.png'/>
+    </view>
+    <view class='comment_item_info'>
+      <text>{{item.name}}</text>
+    </view> 
+    <view>
+      <text>{{item.content}}</text>
+    </view>
+    </view>
+  </view>
+<!-- 评论框 -->
+      <view class='model' wx:if="{{inputBoxShow}}">
+        <!-- invisible_model view 用于点击隐藏model评论框 -->
+        <view class='invisible_model' catchtap='invisible'></view>
+        <view class='input-box'>
+          <textarea class="textarea" bindinput='input' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height/>
+          <button class='send' bindtap='sendComment'>发送</button>
+        </view>
+      </view>
+
 </view>
