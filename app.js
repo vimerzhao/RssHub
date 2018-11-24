@@ -21,7 +21,9 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              console.log("测试")
+              console.log(this.globalData.userInfo)
+              
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -32,8 +34,22 @@ App({
         }
       }
     })
+    // 为什么上面不需要that
+    var that = this
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name: 'get_userinfo',
+      success: function(res) {
+        console.log(res.result.userInfo.openId)
+        that.globalData.openId = res.result.userInfo.openId
+        if (that.openIdCallback) {
+          that.openIdCallback(res.userInfo)
+        }
+      }
+    })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openId: null
   }
 })

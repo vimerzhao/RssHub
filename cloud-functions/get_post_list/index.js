@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
       content: true,
       title: true,
       view_count: true
-    }).orderBy('view_count', 'asc').get(),
+    }).orderBy('update_time', 'desc').get(),
 
   }
 }

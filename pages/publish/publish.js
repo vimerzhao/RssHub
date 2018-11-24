@@ -1,4 +1,5 @@
 // pages/publish/publish.js
+const app = getApp()
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(getApp().globalData)
+    
   },
   input: function (e) {
     this.setData({
@@ -55,14 +57,15 @@ Page({
     wx.cloud.callFunction({
       name: 'publish_post',
       data: {
-        author_name: "vim",
-        content: "内容是什么",
-        image_url: img_url_ok
+        openid: app.globalData.openId,
+        author_name: app.globalData.userInfo.nickName,
+        content: this.data.content,
+        image_url: img_url_ok,
+        update_time: ""
       },
       success: function (res) {
         
         var pages = getCurrentPages();             //  获取页面栈
-        console.log(pages)
         var prevPage = pages[pages.length - 2];    // 上一个页面
         prevPage.setData({
           update: true
