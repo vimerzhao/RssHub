@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
   return {
     comment_list: await db.collection('comment_collection').where({
       postid: event.postid
-    }).orderBy('date', 'desc').get(),
+    }).orderBy('time', 'desc').get(),
 
   }
 }

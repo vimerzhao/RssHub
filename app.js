@@ -6,6 +6,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
+    // 在云开发中不需要这个步骤
     // 登录
     wx.login({
       success: res => {

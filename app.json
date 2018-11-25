@@ -1,9 +1,7 @@
 {
   "pages":[
-    "pages/posts/posts",
-    "pages/index/index",
+    "pages/postlist/postlist",
     "pages/logs/logs",
-    "pages/details/details",
     "pages/publish/publish",
     "pages/postdetail/postdetail"
   ],
@@ -13,11 +11,11 @@
     "navigationBarTitleText": "吃瓜群众",
     "navigationBarTextStyle":"white"
   },
-  "tabBar": {
+  "tabBar--暂时不需要": {
     "selectedColor": "#00BFFF",
     "list": [
       {
-        "pagePath": "pages/posts/posts",
+        "pagePath": "pages/postlist/postlist",
         "text": "发现"
 
       },

@@ -1,5 +1,7 @@
 /* pages/postdetail/postdetail.wxss */
-
+/*
+这个页面结构比较复杂，css有许多可以优化的地方
+*/
 .title_area{
   display: flex;
   flex-direction: row;
@@ -8,14 +10,43 @@
 }
 .text_area {
   margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .publish_time{
   font-size: 8pt;
+  color: gray;
+  margin-top: 1rpx;
+}
+.all_comment{
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+}
+.all_comment_text{
+  font-size: 12pt;
   color: gray;
 }
 .avatar{
   width: 80rpx;
   height: 80rpx;
+  margin-left: 20rpx;
+}
+.comment_item{
+  padding-top: 10rpx;
+}
+.comment_item_head{
+  display: flex;
+  flex-direction: row;
+}
+.author_name{
+  font-size: 14pt;
+}
+.comment_author_name{
+  font-size: 12pt;
+}
+.comment_content{
+  font-size: 12pt;
 }
 .content{
   display: flex;

@@ -6,6 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    contentLoaded: false,
+    imagesLoaded: false,
+    commentLoaded: false,
     detail: {},
     imageUrls: [],
     inputBoxShow: true,
@@ -53,6 +56,7 @@ Page({
       }
     })
 
+    // 获取内容
     wx.cloud.callFunction({
       // 云函数名称 
       name: 'get_post_detail',
@@ -60,19 +64,18 @@ Page({
         postid: options.postid
       },
       success: function (res) {
-        console.log('成功')
-        console.log(res.result)
         var postdetail = res.result.postdetail.data[0];
         that.setData({
-          detail: postdetail
+          detail: postdetail,
+          contentLoaded: true
         })
         that.downloadImages(postdetail.image_url)
       },
       fail: console.error
     })
 
+    // 获取评论
     wx.cloud.callFunction({
-      // 云函数名称 
       name: 'get_comment_for_post',
       data: {
         postid: options.postid,
@@ -80,12 +83,16 @@ Page({
       success: function (res) {
         console.log(res.result.comment_list.data)
         that.setData({
-          comments: res.result.comment_list.data
+          comments: res.result.comment_list.data,
+          commentLoaded: true
         })
       }
     })
 
   },
+  /**
+   * 从数据库获取图片的fileId，然后去云存储下载，最后加载出来
+   */
   downloadImages: function(image_urls){
     var that = this
     if(image_urls.length == 0){
@@ -102,7 +109,8 @@ Page({
             if (urls.length == image_urls.length) {
               console.log(urls)
               that.setData({
-                imageUrls: urls
+                imageUrls: urls,
+                imagesLoaded: true
               })
             }
           },
@@ -164,6 +172,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   sendComment: function() {
     console.log(this.data.comment)
     console.log(getApp().globalData.openId)

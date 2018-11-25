@@ -9,14 +9,15 @@ Page({
     img_url: [],
     content: '',
     clould_img_id_list: [],
-    maxContentLength: 1000
+    maxContentLength: 1000,
+    minContentLength: 10
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(getApp().globalData)
-    
+    // 本页面要传数据到服务器，要对是否拿到这些数据做校验
   },
   input: function (e) {
     if (e.detail.value.length >= this.data.maxContentLength) {
@@ -58,19 +59,23 @@ Page({
       }
     })
   },
+  /**
+   * 执行发布时图片已经上传完成，写入数据库的是图片的fileId
+   */
   publish: function(img_url_ok) {
     wx.cloud.init()
     wx.cloud.callFunction({
       name: 'publish_post',
       data: {
-        openid: app.globalData.openId,
+        openid: app.globalData.openId,// 这个云端其实能直接拿到
         author_name: app.globalData.userInfo.nickName,
         content: this.data.content,
         image_url: img_url_ok,
-        update_time: ""
+        publish_time: "",
+        update_time: ""//目前让服务器自己生成这两个时间
       },
       success: function (res) {
-        
+        // 强制刷新，这个传参很粗暴
         var pages = getCurrentPages();             //  获取页面栈
         var prevPage = pages[pages.length - 2];    // 上一个页面
         prevPage.setData({
@@ -86,13 +91,19 @@ Page({
   },
   //发布按钮事件
   send: function () {
+    if (this.data.content.length < this.data.minContentLength) {
+      wx.showToast({
+        image: '../../images/warn.png',
+        title: '内容太短!',
+      })
+      return
+    }
     var that = this;
-    var user_id = wx.getStorageSync('userid')
+
     wx.showLoading({
       title: '上传中',
     })
-//    that.img_upload()
-    //let that = this;
+
     let img_url = that.data.img_url;
     let img_url_ok = [];
     //由于图片只能一张一张地上传，所以用循环

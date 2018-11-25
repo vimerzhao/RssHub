@@ -1,50 +1,55 @@
 <view class='postdetail'>
-  <view class='title_area'>
-    <view class='avatar_area'>
-      <image class='avatar' src='../../images/bird.png'/>
+    <view class='title_area' wx:if='{{contentLoaded}}'>
+        <view class='avatar_area'>
+            <image class='avatar' src='../../images/cat.png'/>
+        </view>
+        <view class='text_area'>
+            <view><text class='author_name'>{{detail.author_name}}</text></view>
+            <view class='publish_time'>
+                <text class='publish_time'>发表于{{detail.publish_time}}</text>
+            </view>
+        </view>
     </view>
-    <view class='text_area'>
-      <view>{{detail.author_name}}</view>
-      <view><text class='publish_time'>{{detail.update_time}}</text></view>
+    <view class='content'>
+        <view class='text'>
+            <text>{{detail.content}}</text>
+        </view>
+        <view class='image_area'>
+            <view class='image' wx:for='{{imageUrls}}'>
+                <image src='{{item}}' mode='widthFix'></image>
+            </view>
+        </view>
     </view>
-  </view>
-  <view class='content'>
-    <view class='text'>
-      <text>{{detail.content}}</text>
+    <view style='background: red' wx:if='{{false}}'>数据展示区：浏览数，关注数，评论数等等</view>
+    <view class='all_comment' style='background: #EDEDED' wx:if='{{imagesLoaded}}'>
+        <text class='all_comment_text'>全部评论</text>
     </view>
-    <view class='image_area'>
-      <view class='image' wx:for='{{imageUrls}}'>
-        <image src='{{item}}' mode='widthFix'></image>
+    <view class='comment_list' wx:if='{{imagesLoaded}}' wx:for="{{comments}}">
+    
+      <view class='comment_item'>
+        <view class='comment_item_head'>
+          <view class='avatar_area'>
+            <image class='avatar' src='../../images/cat.png'/>
+          </view>
+          <view class='text_area'>
+            <view><text class='author_name comment_author_name'>{{item.name}}</text></view>
+            <view class='publish_time'>
+                <text class='publish_time'>发表于{{item.time}}</text>
+            </view>
+          </view>
+        </view>
+        <view>
+          <text class='comment_content'>{{item.content}}</text>
+        </view>
       </view>
     </view>
-    
-  </view>
-
-  <view style='background: red'>数据展示区：浏览数，关注数，评论数等等</view>
-  <view style='background: red'>
-    <text>全部评论</text>
-  </view>
-  <view class='comment_list' wx:for="{{comments}}">
-    <view class='comment_item'>
-     <view class='avatar_area comment_avatar'>
-      <image class='avatar' src='../../images/bird.png'/>
-    </view>
-    <view class='comment_item_info'>
-      <text>{{item.name}}</text>
-    </view> 
-    <view>
-      <text>{{item.content}}</text>
-    </view>
-    </view>
-  </view>
-<!-- 评论框 -->
-      <view class='model' wx:if="{{inputBoxShow}}">
+    <!-- 评论框 -->
+    <view class='model' wx:if="{{imagesLoaded && commentLoaded && inputBoxShow}}">
         <!-- invisible_model view 用于点击隐藏model评论框 -->
         <view class='invisible_model' catchtap='invisible'></view>
         <view class='input-box'>
-          <textarea class="textarea" bindinput='input' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height/>
-          <button class='send' bindtap='sendComment'>发送</button>
+            <textarea class="textarea" bindinput='input' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height/>
+            <button class='send' bindtap='sendComment'>发送</button>
         </view>
-      </view>
-
+    </view>
 </view>

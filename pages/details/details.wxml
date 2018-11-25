@@ -1,4 +1,0 @@
-<!--pages/details/details.wxml-->
-<text>{{url}}</text>
-<web-view src="https://www.jianshu.com/p/41672f6fe692"></web-view>
-<text>评论区</text>
