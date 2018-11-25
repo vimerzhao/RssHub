@@ -66,40 +66,34 @@
   align-items: center;
 }
 
-
-.input-box {
-  position: float;
-  background-color: #f8f8f8;
-  padding: 30rpx;
-  padding-bottom: 130rpx;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 101;
+.input-box{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30rpx;
+  padding-bottom: 20rpx;
 }
 
+
 .textarea {
-  background-color: #fff;
-  width: 100%;
-  padding: 5rpx;
-  height: 3.3em;
-  font-size: 15px;
-  position: static;
+  background-color: #EFEFEF;
+  font-size: 14px;
   border-style: solid;
-  border-color: gray;
-  border-width: 3rpx;
+  border-color: lightgray;
+  border-width: 1rpx;
+  width: 90%;
+  line-height: 60rpx;
 }
 
 .send {
-  margin-top: 5rpx;
+  margin-top: 10rpx;
   color: #09bb07;
-  float: right;
-}
+  width: 90%;
+  border-style: solid;
+  border-color: #09bb07;
+  border-width: 1rpx;
 
-.invisible_model{
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  bottom: 0;
 }

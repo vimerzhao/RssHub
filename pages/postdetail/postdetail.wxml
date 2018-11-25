@@ -44,11 +44,9 @@
       </view>
     </view>
     <!-- 评论框 -->
-    <view class='model' wx:if="{{imagesLoaded && commentLoaded && inputBoxShow}}">
-        <!-- invisible_model view 用于点击隐藏model评论框 -->
-        <view class='invisible_model' catchtap='invisible'></view>
+    <view class='send_comment_container' wx:if="{{imagesLoaded && commentLoaded && inputBoxShow}}">
         <view class='input-box'>
-            <textarea class="textarea" bindinput='input' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height/>
+            <textarea class="textarea" id="inputComment" value='{{comment_value}}' bindinput='input' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height/>
             <button class='send' bindtap='sendComment'>发送</button>
         </view>
     </view>

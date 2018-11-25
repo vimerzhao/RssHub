@@ -14,18 +14,26 @@ Page({
     inputBoxShow: true,
     maxContentLength: 300,
     comment: '',
-    comments: [
-
-      {
-        name: "1",
-        content: "1"
-      }, {
-        name: "2",
-        content: "2"
-      }
-    ]
+    comments: [],
+    postid: '',
+    comment_value: ''
   },
-
+  refreshComment: function(postid){
+    var that = this
+    wx.cloud.callFunction({
+      name: 'get_comment_for_post',
+      data: {
+        postid: postid,
+      },
+      success: function (res) {
+        console.log(res.result.comment_list.data)
+        that.setData({
+          comments: res.result.comment_list.data,
+          commentLoaded: true
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -73,21 +81,12 @@ Page({
       },
       fail: console.error
     })
+    this.setData({
+      postid: options.postid
+    })
 
     // 获取评论
-    wx.cloud.callFunction({
-      name: 'get_comment_for_post',
-      data: {
-        postid: options.postid,
-      },
-      success: function (res) {
-        console.log(res.result.comment_list.data)
-        that.setData({
-          comments: res.result.comment_list.data,
-          commentLoaded: true
-        })
-      }
-    })
+    this.refreshComment(options.postid)
 
   },
   /**
@@ -174,9 +173,17 @@ Page({
   },
 
   sendComment: function() {
-    console.log(this.data.comment)
-    console.log(getApp().globalData.openId)
-    console.log(getApp().globalData.userInfo.nickName)
+    var that = this
+    if (this.data.comment.length < 1) {
+      wx.showToast({
+        image: '../../images/warn.png',
+        title: '评论不能为空',
+      })
+      return
+    }
+    wx.showLoading({
+      title: '上传中',
+    })
     wx.cloud.callFunction({
       // 云函数名称 
       name: 'add_comment',
@@ -187,12 +194,18 @@ Page({
         content: this.data.comment
       },
       success: function (res) {
-        console.log("同步评论")
+        
+        wx.hideLoading()
+        // this that 很迷
+        that.refreshComment(that.data.postid)
+        that.setData({
+          comment_value: ''
+        })
       }
     })
 
   },
-  input: function (e) {
+  input: function (e) {//就是this.deta.comment_value应该
     if (e.detail.value.length >= this.data.maxContentLength) {
       wx.showToast({
         title: '已达到最大字数限制',
