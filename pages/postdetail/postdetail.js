@@ -95,6 +95,10 @@ Page({
   downloadImages: function(image_urls){
     var that = this
     if(image_urls.length == 0){
+      that.setData({
+        imageUrls: [],
+        imagesLoaded: true
+      })
       return
     } else {
       var urls = []
