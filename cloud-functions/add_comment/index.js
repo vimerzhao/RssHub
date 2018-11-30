@@ -14,7 +14,18 @@ const db = cloud.database({
 // 云函数入口函数
 exports.main = async (event, context) => {
   try {
-    return await db.collection('comment_collection').add({
+    const timestamp = Date.now()
+    await db.collection('post_collection').where({
+      _id: event.postid
+    })
+    .update({
+      data: {
+        update_time: timestamp
+      }
+    })
+
+
+    await db.collection('comment_collection').add({
       // data 字段表示需新增的 JSON 数据
       data: {
         // 存入一条评论
@@ -23,7 +34,7 @@ exports.main = async (event, context) => {
         openid: event.userInfo.openId,
         name: event.name,//评论者名字
         avatarUrl: event.avatarUrl,//评论者头像
-        time: Date.now(),//评论发生的时间
+        time: timestamp,//评论发生的时间
         content: event.content//评论内容
       }
     })
