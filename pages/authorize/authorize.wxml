@@ -1,0 +1,1 @@
+<button type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">获取头像昵称</button>

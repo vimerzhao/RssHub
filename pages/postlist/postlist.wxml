@@ -1,4 +1,4 @@
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"> 获取头像昵称 </button>
+
 
 
 <block wx:for="{{postlist}}">

@@ -3,7 +3,8 @@
     "pages/postlist/postlist",
     "pages/logs/logs",
     "pages/publish/publish",
-    "pages/postdetail/postdetail"
+    "pages/postdetail/postdetail",
+    "pages/authorize/authorize"
   ],
   "window":{
     "backgroundTextStyle":"light",

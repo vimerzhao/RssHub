@@ -1,56 +1,46 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    var that = this
+    wx.clearStorage()
 
-    // 在云开发中不需要这个步骤
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    wx.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+
+      },
+      fail: function() {
+        that.userInfoAuthorize()
       }
     })
-    // 获取用户信息
+  },
+  /**
+   * 这段代码还是很丑陋，怎么优化
+   */
+  userInfoAuthorize: function() {
+    var that = this
+    console.log('authorize')
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+        if (res.authSetting['scope.userInfo']) { // 存储用户信息
           wx.getUserInfo({
             success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              console.log("测试")
-              console.log(this.globalData.userInfo)
-              
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+              console.log(res.userInfo)
+              wx.setStorage({
+                key: that.globalData.userInfo,
+                data: res.userInfo,
+              })
             }
           })
-        }
-      }
-    })
-    // 为什么上面不需要that
-    var that = this
-    wx.cloud.init()
-    wx.cloud.callFunction({
-      name: 'get_userinfo',
-      success: function(res) {
-        console.log(res.result.userInfo.openId)
-        that.globalData.openId = res.result.userInfo.openId
-        if (that.openIdCallback) {
-          that.openIdCallback(res.userInfo)
+        } else { // 跳转到授权页面 
+          wx.navigateTo({
+            url: '/pages/authorize/authorize',
+          })
         }
       }
     })
   },
   globalData: {
-    userInfo: null,
-    openId: null
+    userInfo: "StorageUserInfo"
   }
 })
