@@ -29,7 +29,7 @@
       <view class='comment_item'>
         <view class='comment_item_head'>
           <view class='avatar_area'>
-            <image class='avatar' src='../../images/cat.png'/>
+            <image class="userinfo-avatar avatar" src="{{item.avatarUrl}}" background-size="cover"></image>
           </view>
           <view class='text_area'>
             <view><text class='author_name comment_author_name'>{{item.name}}</text></view>

@@ -194,7 +194,8 @@ Page({
       data: {
         postid: this.data.detail._id,
         openid: app.globalData.openId,
-        name: app.globalData.userInfo.nickName,
+        name: app.globalData.wechatNickName,
+        avatarUrl: app.globalData.wechatAvatarUrl,
         content: this.data.comment
       },
       success: function (res) {

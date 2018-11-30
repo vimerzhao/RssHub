@@ -1,6 +1,8 @@
 //app.js
+const util = require('./utils/util.js');  
 App({
   onLaunch: function () {
+
     var that = this
     wx.clearStorage()
 
@@ -25,11 +27,14 @@ App({
         if (res.authSetting['scope.userInfo']) { // 存储用户信息
           wx.getUserInfo({
             success: res => {
-              console.log(res.userInfo)
+              console.log(res.userInfo.nickName)
+              console.log(util.formatTime(new Date()))
               wx.setStorage({
                 key: that.globalData.userInfo,
                 data: res.userInfo,
               })
+              that.globalData.wechatNickName = res.userInfo.nickName
+              that.globalData.wechatAvatarUrl = res.userInfo.avatarUrl
             }
           })
         } else { // 跳转到授权页面 
@@ -41,6 +46,8 @@ App({
     })
   },
   globalData: {
-    userInfo: "StorageUserInfo"
+    userInfo: "StorageUserInfo",
+    wechatNickName: '',
+    wechatAvatarUrl: ''
   }
 })

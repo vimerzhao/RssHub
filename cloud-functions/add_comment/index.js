@@ -22,6 +22,7 @@ exports.main = async (event, context) => {
         //openid: event.openid,// 唯一标识，不要用自己传的，用sdk产生的
         openid: event.userInfo.openId,
         name: event.name,//评论者名字
+        avatarUrl: event.avatarUrl,//评论者头像
         time: new Date(),//评论发生的时间
         content: event.content//评论内容
       }
