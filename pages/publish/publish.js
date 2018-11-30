@@ -68,7 +68,8 @@ Page({
       name: 'publish_post',
       data: {
         openid: app.globalData.openId,// 这个云端其实能直接拿到
-        author_name: app.globalData.userInfo.nickName,
+        author_name: app.globalData.wechatNickName,
+        author_avatar_url: app.globalData.wechatAvatarUrl,
         content: this.data.content,
         image_url: img_url_ok,
         publish_time: "",
@@ -101,7 +102,7 @@ Page({
     var that = this;
 
     wx.showLoading({
-      title: '上传中',
+      title: '发布中',
     })
 
     let img_url = that.data.img_url;

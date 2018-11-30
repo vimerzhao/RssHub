@@ -1,4 +1,4 @@
-//const util = require('../../utils/util.js');  
+const util = require('../../utils/util.js');  
 const app = getApp()
 Page({
 
@@ -27,6 +27,10 @@ Page({
       },
       success: function (res) {
         console.log(res.result.comment_list.data)
+        var commentList = res.result.comment_list.data
+        for (let i = 0; i < commentList.length; i++) {
+          commentList[i].time = util.formatTime(new Date(commentList[i].time))
+        }
         that.setData({
           comments: res.result.comment_list.data,
           commentLoaded: true
@@ -73,6 +77,7 @@ Page({
       },
       success: function (res) {
         var postdetail = res.result.postdetail.data[0];
+        postdetail.publish_time = util.formatTime(new Date(postdetail.publish_time))
         that.setData({
           detail: postdetail,
           contentLoaded: true

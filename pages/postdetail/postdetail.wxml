@@ -1,7 +1,7 @@
 <view class='postdetail'>
     <view class='title_area' wx:if='{{contentLoaded}}'>
         <view class='avatar_area'>
-            <image class='avatar' src='../../images/cat.png'/>
+            <image class='avatar' src='{{detail.author_avatar_url}}'/>
         </view>
         <view class='text_area'>
             <view><text class='author_name'>{{detail.author_name}}</text></view>

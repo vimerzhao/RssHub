@@ -1,4 +1,6 @@
 // pages/posts/posts.js
+const util = require('../../utils/util.js');  
+
 const app = getApp()
 Page({
 
@@ -24,7 +26,11 @@ Page({
       name: 'get_post_list',
       success: function (res) {
         //提取数据
-        const data = res.result.postlist.data
+        var data = res.result.postlist.data
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i])
+          data[i].update_time = util.formatTime(new Date(data[i].update_time))
+        }
         that.setData({
           postlist: data
         })

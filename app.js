@@ -29,6 +29,7 @@ App({
             success: res => {
               console.log(res.userInfo.nickName)
               console.log(util.formatTime(new Date()))
+              
               wx.setStorage({
                 key: that.globalData.userInfo,
                 data: res.userInfo,
