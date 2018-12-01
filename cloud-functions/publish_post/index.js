@@ -24,7 +24,7 @@ exports.main = async (event, context) => {
         update_time: Date.now(),
         // 默认值，一些目前还没开发，所以没设置
         // comment_count: 0,//评论数，直接读数据库，避免两个数据表示同一含义
-        watch_count: 3,//浏览数
+        watch_count: 1,//浏览数
         // star_count: 0,//TODO：收藏人数
       }
     })

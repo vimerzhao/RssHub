@@ -1,5 +1,5 @@
-<view class='postdetail'>
-    <view class='title_area' wx:if='{{contentLoaded}}'>
+<view class='postdetail' wx:if='{{contentLoaded && imagesLoaded && commentLoaded}}'>
+    <view class='title_area'>
         <view class='avatar_area'>
             <image class='avatar' src='{{detail.author_avatar_url}}'/>
         </view>
@@ -24,7 +24,7 @@
     <view class='all_comment' style='background: #EDEDED' wx:if='{{imagesLoaded}}'>
         <text class='all_comment_text'>全部评论</text>
     </view>
-    <view class='comment_list' wx:if='{{imagesLoaded}}' wx:for="{{comments}}">
+    <view class='comment_list' wx:for="{{comments}}">
     
       <view class='comment_item'>
         <view class='comment_item_head'>
@@ -44,7 +44,7 @@
       </view>
     </view>
     <!-- 评论框 -->
-    <view class='send_comment_container' wx:if="{{imagesLoaded && commentLoaded && inputBoxShow}}">
+    <view class='send_comment_container'>
         <view class='input-box'>
             <textarea class="textarea" id="inputComment" value='{{comment_value}}' bindinput='input' placeholder="请输入你的看法" cursor-spacing="{{65}}" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height/>
             <button class='send' bindtap='sendComment'>发送</button>

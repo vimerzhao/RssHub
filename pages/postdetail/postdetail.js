@@ -35,6 +35,7 @@ Page({
           comments: res.result.comment_list.data,
           commentLoaded: true
         })
+        that.checkLoadFinish()
       }
     })
   },
@@ -42,6 +43,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     /*为什么失败了，小程序端
     const db = wx.cloud.database({
@@ -104,7 +108,6 @@ Page({
         imageUrls: [],
         imagesLoaded: true
       })
-      return
     } else {
       var urls = []
       for(let i = 0; i < image_urls.length; i++) {
@@ -120,6 +123,7 @@ Page({
                 imageUrls: urls,
                 imagesLoaded: true
               })
+              this.checkLoadFinish()
             }
           },
           fail: err => {
@@ -129,6 +133,7 @@ Page({
 
       }
     }
+    this.checkLoadFinish()
   },
 
   /**
@@ -191,7 +196,7 @@ Page({
       return
     }
     wx.showLoading({
-      title: '上传中',
+      title: '发布中',
     })
     wx.cloud.callFunction({
       // 云函数名称 
@@ -225,4 +230,12 @@ Page({
       comment: e.detail.value
     })
   },
+  checkLoadFinish: function() {
+    if (this.data.contentLoaded
+          && this.data.imagesLoaded
+          && this.data.commentLoaded){
+      wx.hideLoading()
+    }
+  }
+
 })
