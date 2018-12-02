@@ -48,7 +48,7 @@
   text-overflow:ellipsis;
 }
 .extra_info_start{
-  width: 600rpx;
+  width: 580rpx;
   padding-right: 30rpx;
 }
 

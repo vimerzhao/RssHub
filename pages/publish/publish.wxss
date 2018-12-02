@@ -1,6 +1,8 @@
 /* pages/publish/publish.wxss */
 .page{
- padding: 20px
+ padding-left: 20rpx;
+ padding-right: 20rpx;
+ padding-top: 5rpx;
 }
 .text{
  width: 100%;

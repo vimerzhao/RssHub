@@ -50,6 +50,16 @@ Page({
           //把每次选择的图push进数组
           let img_url = that.data.img_url;
           for (let i = 0; i < res.tempFilePaths.length; i++) {
+            if (img_url.length >= 9) {
+              wx.showToast({
+                image: '../../images/warn.png',
+                title: '图片过多'
+              })
+              that.setData({
+                hideAdd: 1
+              })
+              break
+            }
             img_url.push(res.tempFilePaths[i])
           }
           that.setData({
@@ -63,7 +73,7 @@ Page({
    * 执行发布时图片已经上传完成，写入数据库的是图片的fileId
    */
   publish: function(img_url_ok) {
-    wx.cloud.init()
+    var that = this
     wx.cloud.callFunction({
       name: 'publish_post',
       data: {
@@ -87,7 +97,9 @@ Page({
           delta: 1
         })
       },
-      fail: console.error
+      fail: function(res) {
+        that.publishFail('发布失败')
+      }
     })
   },
   //发布按钮事件
@@ -103,6 +115,7 @@ Page({
 
     wx.showLoading({
       title: '发布中',
+      mask: true
     })
 
     let img_url = that.data.img_url;
@@ -137,6 +150,7 @@ Page({
         },
         fail: err => {
           // handle error
+          that.publishFail('图片上传失败')
           console.log('fail: ' + err.errMsg)
         }
       })
@@ -191,5 +205,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  publishFail(info) {
+    wx.showToast({
+      image: '../../images/warn.png',
+      title: info,
+      mask: true,
+      duration: 2500
+    })
   }
 })

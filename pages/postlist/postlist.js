@@ -22,7 +22,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    wx.cloud.init()
+    wx.cloud.init({
+      traceUser: true
+    })
     wx.cloud.callFunction({
       // 云函数名称
       // 如果多次调用则存在冗余问题，应该用一个常量表示。放在哪里合适？
