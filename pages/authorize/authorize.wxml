@@ -1,1 +1,4 @@
-<button type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">获取头像昵称</button>
+<view class='container'>
+  <button class='authorize' type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">获取头像昵称</button>
+  <text class='tips'>Tips: 必须授权才能使用全部功能</text>
+</view>

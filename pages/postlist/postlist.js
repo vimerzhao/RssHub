@@ -67,6 +67,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     console.log("posts.js - onShow")
     if (this.data.update) {
       wx.startPullDownRefresh()
@@ -75,8 +76,47 @@ Page({
         update: false
       })
     }
-  },
 
+    wx.getStorage({
+      key: 'userInfo',
+      success: function (res) {
+
+      },
+      fail: function () {
+        that.userInfoAuthorize()
+      }
+    })
+  },
+  /**
+   * 这段代码还是很丑陋，怎么优化
+   */
+  userInfoAuthorize: function () {
+    var that = this
+    console.log('authorize')
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) { // 存储用户信息
+          wx.getUserInfo({
+            success: res => {
+              console.log(res.userInfo.nickName)
+              console.log(util.formatTime(new Date()))
+
+              wx.setStorage({
+                key: app.globalData.userInfo,
+                data: res.userInfo,
+              })
+              app.globalData.wechatNickName = res.userInfo.nickName
+              app.globalData.wechatAvatarUrl = res.userInfo.avatarUrl
+            }
+          })
+        } else { // 跳转到授权页面 
+          wx.navigateTo({
+            url: '/pages/authorize/authorize',
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
