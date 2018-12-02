@@ -2,6 +2,7 @@
 /*
 这个页面结构比较复杂，css有许多可以优化的地方
 */
+
 .title_area{
   display: flex;
   flex-direction: row;
@@ -30,10 +31,11 @@
 .avatar{
   width: 80rpx;
   height: 80rpx;
-  margin-left: 20rpx;
 }
 .comment_item{
   padding-top: 10rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }
 .comment_item_head{
   display: flex;
@@ -45,6 +47,11 @@
 .comment_author_name{
   font-size: 12pt;
 }
+
+.all_comment_list{
+  margin-bottom: 102rpx;
+}
+
 .comment_content{
   font-size: 12pt;
 }
@@ -67,33 +74,44 @@
 }
 
 .input-box{
+  margin-top: 34rpx;
   display: flex;
-  flex-direction: column;
+  align-items: flex-end; /*底部对齐*/
+  justify-content: space-between; /*两端对齐*/
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
   width: 100%;
-  background: #fff;
-  justify-content: center;
-  align-items: center;
-  padding-top: 30rpx;
-  padding-bottom: 20rpx;
+  padding: 18rpx 0 18rpx 30rpx;
+  background-color: #F7F8F7;
+  font-size: 28rpx;
+  z-index: 999;
+}
+.divLine{
+ background: #EEEDEE;
+ width: 100%;
+ height: 10rpx;
 }
 
-
-.textarea {
-  background-color: #EFEFEF;
-  font-size: 14px;
-  border-style: solid;
-  border-color: lightgray;
-  border-width: 1rpx;
-  width: 90%;
-  line-height: 60rpx;
+.input-box .textarea {
+width: 604rpx;
+min-height: 34rpx;
+max-height: 102rpx; /*最多显示三行*/
+border-width: 15rpx 20rpx; /*使用padding与预期留白不一致，故使用border*/
+border-style: solid;
+border-color: #ffffff;
+line-height: 34rpx;
+font-size: 28rpx;
+background-color: #ffffff;
+border-radius: 4rpx;
 }
 
 .send {
-  margin-top: 10rpx;
-  color: #09bb07;
-  width: 90%;
-  border-style: solid;
-  border-color: #09bb07;
-  border-width: 1rpx;
+ width: 116rpx;
+height: 64rpx;
+line-height: 64rpx;
+text-align: center;
+color: #66CC00;
 
 }

@@ -11,8 +11,7 @@
         </view>
         <view class="layout_horizontal">
             <view>
-                <text class='extra_info'>{{item.author_name}};最近更新于</text>
-                <text class='extra_info'>{{item.update_time}}</text>
+                <text class='extra_info extra_info_start'>{{item.author_name}}</text>
             </view>
             <view>
                 <text class='extra_info watch_count'>{{item.watch_count}}人浏览</text>

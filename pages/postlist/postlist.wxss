@@ -39,6 +39,16 @@
   -webkit-line-clamp: 4;
 }
 .extra_info{
+  display: block;
   font-size: 10pt;
+  width: 650rpx;
   color: lightgray;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
+.extra_info_start{
+  width: 600rpx;
+  padding-right: 30rpx;
+}
+

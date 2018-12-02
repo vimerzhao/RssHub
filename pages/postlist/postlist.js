@@ -19,6 +19,9 @@ Page({
    */
   refresh: function () {
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.init()
     wx.cloud.callFunction({
       // 云函数名称
@@ -31,6 +34,7 @@ Page({
           console.log(data[i])
           data[i].update_time = util.formatTime(new Date(data[i].update_time))
         }
+        wx.hideLoading()
         that.setData({
           postlist: data
         })
